@@ -4,16 +4,18 @@ import SingleSetting from "./Entry";
 import { addOverride, getOverridesArray, subscribeArrayList } from "../settings";
 
 
-const { ScrollView } = General;
-const { StyleSheet, Button } = ReactNative
+const { ScrollView, KeyboardAvoidingView } = General;
+const { StyleSheet, Button, Platform } = ReactNative
 const { useState, useEffect } = React
 
 
 export const styles = StyleSheet.create({
     scrollview: {
-        marginBottom: 20
+        paddingBottom: 50,
     }
 });
+
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0
 
 export default function() {
     const [array, setArray] = useState(getOverridesArray);
@@ -24,11 +26,13 @@ export default function() {
     }, []);
 
     return (
-        <ScrollView style={styles.scrollview}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={keyboardVerticalOffset}>
+        <ScrollView contentContainerStyle={styles.scrollview}>
             {array.map(function(object, i){
                 return <SingleSetting object={object} count={i}></SingleSetting>
             })}
             <Button title="Add more?" onPress={addOverride}></Button>
         </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
