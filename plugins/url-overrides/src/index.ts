@@ -5,9 +5,7 @@ import { getOverridesArray } from "./settings/settings";
 
 import { ReactNative } from "@vendetta/metro/common";
 
-
 const { Linking } = ReactNative
-
 
 export const settings = Settings;
 export const onLoad = () => console.log("URL Overrides loaded.");
