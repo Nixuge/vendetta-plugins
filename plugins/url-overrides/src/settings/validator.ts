@@ -13,6 +13,7 @@ export function validateRegex(item: Override): boolean {
     }
     
     try {
+        new RegExp(item.from);
         // item.regexPattern = new RegExp(item.from);
         return true;
     } catch(e) {

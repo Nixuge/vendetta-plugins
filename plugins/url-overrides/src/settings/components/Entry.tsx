@@ -52,17 +52,17 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         top: 0,
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
         backgroundColor: '#111',
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10
     },
     cross: {
         color: "white",
-        fontSize: 15,
+        fontSize: 17,
         textAlign: "center",
-        lineHeight: 28
+        lineHeight: 32
     }
 })
 
@@ -108,7 +108,10 @@ export default function(properties: SettingProperties) {
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.crossView} onPress={() => removeOverride(properties.object)}><Text style={styles.cross}>x</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.crossView} onPress={() => removeOverride(properties.object)}>
+                <Text style={styles.cross}>x</Text>
+            </TouchableOpacity>
+
             <Text style={styles.title}>Override n°{properties.count+1}</Text>
 
             <Animated.View style={[styles.fromInputWrap, { backgroundColor }]}>
