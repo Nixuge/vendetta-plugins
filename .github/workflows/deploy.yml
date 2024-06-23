@@ -11,20 +11,15 @@ jobs:
           contents: write
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
-            - name: Prepare environment
-              uses: actions/setup-node@v3
-              with:
-                  node-version: "16"
+            - name: Use Bun
+              uses: oven-sh/setup-bun@v1
 
-            - run: npm install --global pnpm
-
-            - name: Install deps
-              run: pnpm m i
+            - run: bun i
 
             - name: Build plugin(s)
-              run: node ./build.mjs
+              run: bun ./build.mjs
 
               # Foolproof feature:
               # - Copies over README so that the root of the deployed website shows it
