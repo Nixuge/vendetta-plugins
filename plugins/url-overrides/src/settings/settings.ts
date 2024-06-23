@@ -20,7 +20,7 @@ export function addOverride() {
         useRegex: false
     } satisfies Override;
 
-    overrideArray.push(newOverride);    
+    overrideArray.push(newOverride);
     notifyListeners();
 };
 
@@ -35,7 +35,7 @@ export function removeOverride(override: Override) {
     if (index > -1) {
         overrideArray = [...overrideArray.slice(0, index), ...overrideArray.slice(index + 1)];
         if (index != overrideArray.length) // if not last index
-            recalculateAllIndexes()
+            recalculateAllIndexes();
         
         notifyListeners();
     }    

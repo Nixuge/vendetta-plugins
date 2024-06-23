@@ -7,8 +7,8 @@ import { validateRegex } from "../validator";
 
 const { View, Text, TouchableOpacity, Animated } = General;
 const { FormSwitchRow } = Forms;
-const { TextInput, StyleSheet } = ReactNative
-const { useState, useEffect, useRef } = React
+const { TextInput, StyleSheet } = ReactNative;
+const { useState, useEffect, useRef } = React;
 
 const styles = StyleSheet.create({
     view: {

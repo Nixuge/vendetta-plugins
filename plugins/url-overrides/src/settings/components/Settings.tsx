@@ -5,8 +5,8 @@ import { addOverride, getOverridesArray, subscribeArrayList } from "../settings"
 
 
 const { ScrollView, KeyboardAvoidingView, TouchableOpacity, Text } = General;
-const { StyleSheet, Platform } = ReactNative
-const { useState, useEffect } = React
+const { StyleSheet, Platform } = ReactNative;
+const { useState, useEffect } = React;
 
 
 export const styles = StyleSheet.create({
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     }
 });
 
-const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0;
 
 export default function() {
     const [array, setArray] = useState(getOverridesArray);

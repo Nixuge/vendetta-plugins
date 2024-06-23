@@ -17,8 +17,8 @@ export const onUnload = () => {
 const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
     let originalUrl: string;
     try {
-        originalUrl = args[0]
-    } catch(e) { return }    
+        originalUrl = args[0];
+    } catch(e) { return }
 
     let url = originalUrl;
 
@@ -26,7 +26,7 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
     const overrides = getOverridesArray();
     for (const override of overrides) {
         // Try replacing smth in the url
-        if (override.useRegex) {            
+        if (override.useRegex) {
             try {
                 const re = new RegExp(override.from.trim(), "g");
                 let match: undefined | any[] = originalUrl.matchAll(re).next().value;
@@ -36,7 +36,7 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
                     changed = true;
                     url = override.to;
                     match.slice(1).forEach((replacement, i) => {
-                        url = url.replaceAll(`$${i+1}`, replacement)                        
+                        url = url.replaceAll(`$${i+1}`, replacement);
                     });
                 }
             } catch(e) {
@@ -45,7 +45,7 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
         } else {
             if (url.includes(override.from)) {
                 changed = true;
-                url.replaceAll(override.from, override.to)
+                url.replaceAll(override.from, override.to);
             }
         }
         
@@ -53,7 +53,7 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
         if (changed) {
             if (override.bypassInApp) {
                 console.debug("Override found - skipping in-app browser while opening URL");
-                Linking.openURL(url)
+                Linking.openURL(url);
             } else {
                 console.debug("Override found - Opening URL normally");
                 originalFunction(url, args[1], args[2]);
