@@ -22,16 +22,35 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
 
     let url = originalUrl;
 
+    let changed = false;
     const overrides = getOverridesArray();
     for (const override of overrides) {
         // Try replacing smth in the url
-        if (override.useRegex)
-            url = url.replaceAll(override.regexPattern, override.to)
-        else
-            url = url.replaceAll(override.from, override.to) // TODO: TEST REGEX IF WEIRD OR NAH
+        if (override.useRegex) {            
+            try {
+                const re = new RegExp(override.from.trim(), "g");
+                let match: undefined | any[] = originalUrl.matchAll(re).next().value;
+                if (match == undefined) {
+                    changed = false;
+                } else {
+                    changed = true;
+                    url = override.to;
+                    match.slice(1).forEach((replacement, i) => {
+                        url = url.replaceAll(`$${i+1}`, replacement)                        
+                    });
+                }
+            } catch(e) {
+                console.log(e);
+            }
+        } else {
+            if (url.includes(override.from)) {
+                changed = true;
+                url.replaceAll(override.from, override.to)
+            }
+        }
         
         // If smth did get replaced check if bypassInApp & open it
-        if (url != originalUrl) {
+        if (changed) {
             if (override.bypassInApp) {
                 console.debug("Override found - skipping in-app browser while opening URL");
                 Linking.openURL(url)
