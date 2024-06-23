@@ -1,0 +1,14 @@
+{
+    "name": "URL Overrides",
+    "description": "A plugin to replace some parts in urls when you open some links.",
+    "authors": [
+        {
+            "name": "Nixuge",
+            "id": "784062518901473351"
+        }
+    ],
+    "main": "src/index.ts",
+    "vendetta": {
+        "icon": "ic_badge_staff"
+    }
+}
