@@ -28,7 +28,7 @@ const unpatch = instead("openURL", urlFunc, (args, originalFunction) => {
         // Try replacing smth in the url
         if (override.useRegex) {
             try {
-                const re = new RegExp(override.from.trim(), "g");
+                const re = new RegExp(override.from.trim(), "gi");
                 let match: undefined | any[] = originalUrl.matchAll(re).next().value;
                 if (match == undefined) {
                     changed = false;
